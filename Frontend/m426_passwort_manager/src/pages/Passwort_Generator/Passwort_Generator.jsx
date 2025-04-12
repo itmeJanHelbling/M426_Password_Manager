@@ -4,7 +4,7 @@ import axios from "axios"; // Importiere axios
 export default function Passwort_Generator() {
   const [password, setPassword] = useState("");
 
-  //Passwort generieren
+  //Passwort
   const generatePassword = async () => {
     try {
       const response = await axios.get("http://localhost:8080/api/generate"); // Axios GET-Request

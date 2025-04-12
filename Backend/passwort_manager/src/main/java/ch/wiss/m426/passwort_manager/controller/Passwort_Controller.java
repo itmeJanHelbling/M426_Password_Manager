@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/")
 public class Passwort_Controller {
     
-    @GetMapping("generate")
+     @GetMapping("/api/generate")
     public String generatePassword() {
         // Beispiel für ein einfaches Passwort (16 Zeichen lang)
         return generateRandomPassword();
