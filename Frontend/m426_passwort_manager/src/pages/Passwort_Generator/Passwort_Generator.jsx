@@ -21,7 +21,8 @@ export default function Passwort_Generator() {
 
   return (
     <>
-      <div className="password-generator">
+      <h1>Passwort Generator</h1>
+      {/* <div className="password-generator">
         <button onClick={generatePassword} className="generate-button">
           Passwort generieren
         </button>
@@ -39,7 +40,7 @@ export default function Passwort_Generator() {
             </button>
           </div>
         )}
-      </div>
+      </div> */}
     </>
   );
 }
