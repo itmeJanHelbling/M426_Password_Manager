@@ -10,7 +10,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")  // Alle Endpunkte
-                .allowedOrigins("http://localhost:5174")  // Das Frontend (hier anpassen)
+                .allowedOrigins("http://localhost:5173")  // Das Frontend (hier anpassen)
                 .allowedMethods("GET", "POST", "PUT", "DELETE")  // Welche HTTP-Methoden erlaubt sind
                 .allowedHeaders("*")  // Alle Header erlauben
                 .allowCredentials(true);  // Falls Cookies oder Auth-Daten verwendet werden

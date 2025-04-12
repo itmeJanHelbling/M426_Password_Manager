@@ -10,9 +10,6 @@ export default function Navigation() {
         <li>
           <Link to="/manager">Passwort Manager</Link>
         </li>
-        <li>
-          <Link to="/übersicht">Passworübersicht</Link>
-        </li>
       </ul>
     </nav>
   );
