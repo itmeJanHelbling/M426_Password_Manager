@@ -1,30 +1,32 @@
 package ch.wiss.m426.passwort_manager.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import ch.wiss.m426.passwort_manager.service.PasswortService;
 
 @RestController
 @RequestMapping("/api/")
 public class Passwort_Controller {
-    
-    @GetMapping("generate")
-    public String generatePassword() {
-        // Beispiel für ein einfaches Passwort (16 Zeichen lang)
-        return generateRandomPassword();
-    }
 
-    private String generateRandomPassword() {
-        int length = 16;
-        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+";
-        StringBuilder password = new StringBuilder(length);
-        
-        for (int i = 0; i < length; i++) {
-            int randomIndex = (int) (Math.random() * chars.length());
-            password.append(chars.charAt(randomIndex));
+    @Autowired
+    private PasswortService passwordService;
+
+    @GetMapping("/generate")
+    public ResponseEntity<?> generatePassword(
+            @RequestParam int length,
+            @RequestParam boolean includeNumbers,
+            @RequestParam boolean includeSpecialChars) {
+
+        try {
+            String password = passwordService.generatePassword(length, includeNumbers, includeSpecialChars);
+            return ResponseEntity.ok(password);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-        
-        return password.toString();
     }
-
 }
