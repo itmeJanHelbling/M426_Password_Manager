@@ -14,7 +14,7 @@ export default function Passwort_Generator() {
     }
   };
 
-  //Passwort kopieren
+  //Passwort kopieren ...
   const copyToClipboard = () => {
     navigator.clipboard.writeText(password);
   };
