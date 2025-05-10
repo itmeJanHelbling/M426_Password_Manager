@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import "../style/PasswordApp.css";
+
 
 export default function Passwort_Generator() {
   // Globale Variablen

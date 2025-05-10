@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import ManualSave from "../../components/ManualSave";
 import EditEntry from "../../components/EditEntry";
+import "../style/PasswordApp.css";
+
+
 
 export default function Passwort_Manager() {
   const [passwords, setPasswords] = useState([]);
@@ -57,7 +60,7 @@ export default function Passwort_Manager() {
   };
 
   return (
-    <div>
+    <div className="password-manager">
       <h1>Passwort Manager</h1>
       <table>
         <thead>
