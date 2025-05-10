@@ -4,8 +4,6 @@ import ManualSave from "../../components/ManualSave";
 import EditEntry from "../../components/EditEntry";
 import "../style/PasswordApp.css";
 
-
-
 export default function Passwort_Manager() {
   const [passwords, setPasswords] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
@@ -77,8 +75,18 @@ export default function Passwort_Manager() {
               <td>{entry.username}</td>
               <td>{entry.password}</td>
               <td>
-                <button onClick={() => handleEdit(entry)}>Edit</button>
-                <button onClick={() => handleDelete(entry.id)}>Delete</button>
+                <button
+                  className="edit-button"
+                  onClick={() => handleEdit(entry)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="delete-button"
+                  onClick={() => handleDelete(entry.id)}
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}

@@ -16,35 +16,44 @@ export default function EditEntry({ entry, onSave, onDelete, onClose }) {
 
   return (
     <div className="edit-entry">
-      <h2>Edit Entry</h2>
+      <h2>Eintrag anpassen</h2>
       <div>
-        <label>Site Name</label>
+        <label>Name der Webseite: </label>
         <input
+          className="input-edit"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
       </div>
       <div>
-        <label>Username</label>
+        <label>Benutername/Email: </label>
         <input
+          className="input-edit"
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
       </div>
       <div>
-        <label>Password</label>
+        <label>Passwort: </label>
         <input
+          className="input-edit"
           type="text"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
       <div className="actions">
-        <button onClick={handleSave}>Save</button>
-        <button onClick={handleDelete}>Delete</button>
-        <button onClick={onClose}>Close</button>
+        <button className="save-button" onClick={handleSave}>
+          Speichern
+        </button>
+        <button className="delete-button" onClick={handleDelete}>
+          Löschen
+        </button>
+        <button className="close-button" onClick={onClose}>
+          Schliessen
+        </button>
       </div>
     </div>
   );
