@@ -9,7 +9,7 @@ public class PasswortService {
 
     private static final String LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String NUMBERS = "0123456789";
-    private static final String SPECIAL_CHARS = "!@#$%^&*()_-+=<>?/{}~|";
+    private static final String SPECIAL_CHARS = "!@#$%&*_-+=?/";
     private static final Set<Integer> ALLOWED_LENGTHS = Set.of(8, 12, 16);
     private static final SecureRandom random = new SecureRandom();
 
@@ -17,37 +17,33 @@ public class PasswortService {
         if (!ALLOWED_LENGTHS.contains(length)) {
             throw new IllegalArgumentException("Nur Längen 8, 12 oder 16 sind erlaubt.");
         }
-
+    
+        StringBuilder characterPool = new StringBuilder(LETTERS);
         StringBuilder password = new StringBuilder();
-        String characters = LETTERS;
-        
-        // Mindestanzahl an Zahlen und Sonderzeichen sicherstellen
-        int numbersCount = includeNumbers ? Math.max(2, length / 4) : 0;
-        int specialCharsCount = includeSpecialChars ? Math.max(2, length / 4) : 0;
-        int lettersCount = length - numbersCount - specialCharsCount;
-
-        // Buchstaben hinzufügen
-        for (int i = 0; i < lettersCount; i++) {
-            password.append(LETTERS.charAt(random.nextInt(LETTERS.length())));
-        }
-
-        // Zahlen hinzufügen
+    
+        // Platz für garantierte Zeichen reservieren
         if (includeNumbers) {
-            for (int i = 0; i < numbersCount; i++) {
-                password.append(NUMBERS.charAt(random.nextInt(NUMBERS.length())));
-            }
+            char number = NUMBERS.charAt(random.nextInt(NUMBERS.length()));
+            password.append(number);
+            characterPool.append(NUMBERS);
         }
-
-        // Sonderzeichen hinzufügen
         if (includeSpecialChars) {
-            for (int i = 0; i < specialCharsCount; i++) {
-                password.append(SPECIAL_CHARS.charAt(random.nextInt(SPECIAL_CHARS.length())));
-            }
+            char special = SPECIAL_CHARS.charAt(random.nextInt(SPECIAL_CHARS.length()));
+            password.append(special);
+            characterPool.append(SPECIAL_CHARS);
         }
-
-        // Passwort mischen
+    
+        // Restliche Zeichen zufällig aus dem Pool wählen
+        while (password.length() < length) {
+            int index = random.nextInt(characterPool.length());
+            password.append(characterPool.charAt(index));
+        }
+    
+        // Zeichen mischen und zurückgeben
         return shuffleString(password.toString());
     }
+    
+    
 
     private String shuffleString(String input) {
         char[] characters = input.toCharArray();

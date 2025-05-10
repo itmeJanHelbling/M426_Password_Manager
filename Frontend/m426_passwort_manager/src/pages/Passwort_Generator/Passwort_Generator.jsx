@@ -2,24 +2,22 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function Passwort_Generator() {
+  // Globale Variablen
   const [password, setPassword] = useState("");
+
+  //Passwort generieren
   const [length, setLength] = useState(12);
-  const [numbersOption, setNumbersOption] = useState("1"); // 0=nein, 1=ja, 2=extra
-  const [specialCharsOption, setSpecialCharsOption] = useState("1"); // 0=nein, 1=ja, 2=extra
+  const [includeNumbers, setIncludeNumbers] = useState(true);
+  const [includeSpecialChars, setIncludeSpecialChars] = useState(true);
 
   const generatePassword = async () => {
     try {
-      // Umwandlung der Radiobutton-Werte in booleans für das Backend
-      const includeNumbers = numbersOption !== "0";
-      const includeSpecialChars = specialCharsOption !== "0";
-      
-      // Extra Zahlen/Sonderzeichen können hier implementiert werden
       const response = await axios.get("http://localhost:8080/api/generate", {
         params: {
           length,
           includeNumbers,
-          includeSpecialChars
-        }
+          includeSpecialChars,
+        },
       });
       setPassword(response.data);
     } catch (error) {
@@ -32,13 +30,39 @@ export default function Passwort_Generator() {
     navigator.clipboard.writeText(password);
   };
 
+  //Passwort speichern
+  const [siteName, setSiteName] = useState("");
+  const [username, setUsername] = useState("");
+  const [saveMessage, setSaveMessage] = useState("");
+
+  const savePassword = async () => {
+    if (!password || !siteName || !username) {
+      setSaveMessage("Bitte alle Felder ausfüllen!");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:8080/api/save", {
+        name: siteName,
+        username: username,
+        password: password,
+        createdAt: "", // Wird noch leer gelassen, weil das Backend das Attribut "created at" ausfüllt
+      });
+      setSaveMessage(response.data); // response like "Gespeichert!"
+      setSiteName("");
+      setUsername("");
+    } catch (error) {
+      console.error("Fehler beim Speichern:", error);
+      setSaveMessage("Fehler beim Speichern!");
+    }
+  };
   return (
     <div className="password-generator">
       <div className="options">
         <div className="option-group">
           <label>Länge:</label>
-          <select 
-            value={length} 
+          <select
+            value={length}
             onChange={(e) => setLength(parseInt(e.target.value))}
           >
             <option value={8}>8</option>
@@ -46,7 +70,7 @@ export default function Passwort_Generator() {
             <option value={16}>16</option>
           </select>
         </div>
-        
+
         <div className="option-group">
           <label>Zahlen:</label>
           <div className="radio-group">
@@ -54,35 +78,25 @@ export default function Passwort_Generator() {
               <input
                 type="radio"
                 name="numbers"
-                value="0"
-                checked={numbersOption === "0"}
-                onChange={(e) => setNumbersOption(e.target.value)}
+                value="true"
+                checked={includeNumbers}
+                onChange={() => setIncludeNumbers(true)}
               />
-              0 (keine)
+              Ja
             </label>
             <label>
               <input
                 type="radio"
                 name="numbers"
-                value="1"
-                checked={numbersOption === "1"}
-                onChange={(e) => setNumbersOption(e.target.value)}
+                value="false"
+                checked={!includeNumbers}
+                onChange={() => setIncludeNumbers(false)}
               />
-              1 (normal)
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="numbers"
-                value="2"
-                checked={numbersOption === "2"}
-                onChange={(e) => setNumbersOption(e.target.value)}
-              />
-              2 (extra)
+              Nein
             </label>
           </div>
         </div>
-        
+
         <div className="option-group">
           <label>Sonderzeichen:</label>
           <div className="radio-group">
@@ -90,31 +104,21 @@ export default function Passwort_Generator() {
               <input
                 type="radio"
                 name="specialChars"
-                value="0"
-                checked={specialCharsOption === "0"}
-                onChange={(e) => setSpecialCharsOption(e.target.value)}
+                value="true"
+                checked={includeSpecialChars}
+                onChange={() => setIncludeSpecialChars(true)}
               />
-              0 (keine)
+              Ja
             </label>
             <label>
               <input
                 type="radio"
                 name="specialChars"
-                value="1"
-                checked={specialCharsOption === "1"}
-                onChange={(e) => setSpecialCharsOption(e.target.value)}
+                value="false"
+                checked={!includeSpecialChars}
+                onChange={() => setIncludeSpecialChars(false)}
               />
-              1 (normal)
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="specialChars"
-                value="2"
-                checked={specialCharsOption === "2"}
-                onChange={(e) => setSpecialCharsOption(e.target.value)}
-              />
-              2 (extra)
+              Nein
             </label>
           </div>
         </div>
@@ -137,6 +141,31 @@ export default function Passwort_Generator() {
           </button>
         </div>
       )}
+      <div>
+        {password && (
+          <div className="save-form">
+            <h3>Passwort speichern</h3>
+            <input
+              type="text"
+              placeholder="Name der Website"
+              value={siteName}
+              onChange={(e) => setSiteName(e.target.value)}
+              className="input"
+            />
+            <input
+              type="text"
+              placeholder="Benutzername / E-Mail"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="input"
+            />
+            <button onClick={savePassword} className="save-button">
+              Speichern
+            </button>
+            {saveMessage && <p className="save-message">{saveMessage}</p>}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
