@@ -11,7 +11,7 @@ export default function Passwort_Generator() {
   const [length, setLength] = useState(12);
   const [includeNumbers, setIncludeNumbers] = useState(true);
   const [includeSpecialChars, setIncludeSpecialChars] = useState(true);
-
+  
   const generatePassword = async () => {
     try {
       const response = await axios.get("http://localhost:8080/api/generate", {
@@ -27,7 +27,6 @@ export default function Passwort_Generator() {
       setPassword("Fehler beim Generieren des Passworts");
     }
   };
-
   const copyToClipboard = () => {
     navigator.clipboard.writeText(password);
   };
@@ -72,8 +71,7 @@ export default function Passwort_Generator() {
             <option value={16}>16</option>
           </select>
         </div>
-
-        <div className="option-group">
+ <div className="option-group">
           <label>Zahlen:</label>
           <div className="radio-group">
             <label>
@@ -169,5 +167,6 @@ export default function Passwort_Generator() {
         )}
       </div>
     </div>
+
   );
 }
