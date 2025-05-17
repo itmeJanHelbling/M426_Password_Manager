@@ -95,5 +95,17 @@ public class Passwort_Controller {
             return ResponseEntity.internalServerError().body("Fehler beim Löschen.");
         }
     }
+
+    //Get Mapping für das Filtern eines Suchbegriffes
+    @GetMapping("/passwords/search")
+    public ResponseEntity<List<PasswortEntry>> searchPasswords(@RequestParam String query) {
+        try {
+            List<PasswortEntry> results = csvExportService.searchEntriesByName(query);
+            return ResponseEntity.ok(results);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
 }
 

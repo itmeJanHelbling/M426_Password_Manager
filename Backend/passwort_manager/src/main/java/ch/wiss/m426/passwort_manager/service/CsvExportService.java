@@ -141,5 +141,19 @@ public class CsvExportService {
                 }
             }
         }
-    }      
+    }  
+    
+    // Methode um das CSV nach einem Begriff zu filtern
+    public List<PasswortEntry> searchEntriesByName(String query) throws IOException {
+        List<PasswortEntry> allEntries = readFromCsv();
+        List<PasswortEntry> filteredEntries = new ArrayList<>();
+    
+        for (PasswortEntry entry : allEntries) {
+            if (entry.getName() != null && entry.getName().toLowerCase().contains(query.toLowerCase())) {
+                filteredEntries.add(entry);
+            }
+        }
+    
+        return filteredEntries;
+    }
 }
