@@ -1,0 +1,24 @@
+.manual-save {
+  margin-left: 16px;
+  margin-bottom: 20px;
+}
+
+.save-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.save-form input {
+  display: flex;
+  margin-right: 20px;
+  width: fit-content;
+}
+
+h3 {
+  text-align: center;
+}
+
+.save-button {
+  align-self: center;
+}
