@@ -52,7 +52,7 @@ Für die Umsetzung unseres Passwort-Managers haben wir bewusst moderne und etabl
 Diese Kombination hat uns erlaubt, eine moderne, zukunftssichere und erweiterbare Architektur aufzubauen, bei der Frontend und Backend klar voneinander getrennt sind. Somit wäre es auch in zukünftigen Versionen problemlos möglich, beispielsweise eine Datenpersistenz mit einer Datenbank hinzuzufügen oder weitere Sicherheitsmechanismen zu integrieren.
 
 - **Datenhaltung**:  
-  In der aktuellen Version werden Passwörter **temporär im Frontend** verwaltet  
+  In der aktuellen Version werden Passwörter **temporär im Backend** verwaltet mit hilfe einer CSV Datei.
   *(optional erweiterbar mit Persistenzlösung)*
 
 - **Security**:  
