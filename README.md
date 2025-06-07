@@ -33,7 +33,7 @@ Die Umsetzung erfolgte nach **agilen Prinzipien**, wobei besonderer Wert auf ite
 - **Kommunikation**: HTTP-Requests über Axios
 
 - **Datenhaltung**:  
-  In der aktuellen Version werden Passwörter **temporär im Frontend** verwaltet  
+  In der aktuellen Version werden Passwörter **temporär im Backend** verwaltet mit hilfe einer CSV Datei.
   *(optional erweiterbar mit Persistenzlösung)*
 
 - **Security**:  
@@ -51,13 +51,6 @@ Für die Umsetzung unseres Passwort-Managers haben wir bewusst moderne und etabl
 
 Diese Kombination hat uns erlaubt, eine moderne, zukunftssichere und erweiterbare Architektur aufzubauen, bei der Frontend und Backend klar voneinander getrennt sind. Somit wäre es auch in zukünftigen Versionen problemlos möglich, beispielsweise eine Datenpersistenz mit einer Datenbank hinzuzufügen oder weitere Sicherheitsmechanismen zu integrieren.
 
-- **Datenhaltung**:  
-  In der aktuellen Version werden Passwörter **temporär im Backend** verwaltet mit hilfe einer CSV Datei.
-  *(optional erweiterbar mit Persistenzlösung)*
-
-- **Security**:  
-  Grundkonfiguration mit Spring Security vorbereitet
-
 ---
 
 ## Funktionalitäten
@@ -66,7 +59,6 @@ Diese Kombination hat uns erlaubt, eine moderne, zukunftssichere und erweiterbar
 - Auflistung vorhandener Einträge
 - Möglichkeit zur **Bearbeitung und zum Löschen** von Passwörtern
 - Benutzerfreundliche Weboberfläche zur Verwaltung
-- Vorbereitung für **Authentifizierung** (z. B. Benutzer-Login)
 
 ---
 
@@ -80,7 +72,7 @@ Diese Kombination hat uns erlaubt, eine moderne, zukunftssichere und erweiterbar
   - „Als Nutzer möchte ich bestehende Passwörter bearbeiten und löschen können, um meine Übersicht aktuell zu halten.“
 
 - **Sprints**  
-  Umsetzung erfolgte in kurzen Iterationen von **1–2 Wochen**
+  Umsetzung erfolgte in kurzen Iterationen von **einem halben Tag**
 
 - **Daily Standups** *(fiktiv für Projektdokumentation)*  
   Regelmäßige Absprachen im Team, um Fortschritte und Blocker zu besprechen
@@ -102,13 +94,11 @@ Diese Kombination hat uns erlaubt, eine moderne, zukunftssichere und erweiterbar
   Überwachte die Einhaltung agiler Prinzipien und unterstützte das Team bei der Selbstorganisation
 
 - **Entwicklungsteam**:  
-  Mazlum Raimi, Kyriakos Amanatidis – Umsetzung von Frontend und Backend
+  Mazlum Raimi, Kyriakos Amanatidis, Jan Helbling, Patrik Rossetti – Umsetzung von Frontend und Backend
 
 ---
 
 ## User-Stories mit Akzeptanzkriterien
-
-- **Als User möchte ich eine Übersichtliche ansicht, um gut zu naviegieren**
 
 - **Als User möchte ich alle gespeicherten Passwörter in einer Übersicht sehen damit ich schnell erkenne, welche Logins ich habe.**
     Akzeptanzkriterien
